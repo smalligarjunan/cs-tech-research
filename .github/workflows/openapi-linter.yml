@@ -1,0 +1,75 @@
+name: Lint OpenAPI Documents
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+env:
+  WARNINGS_THRESHOLD: 20
+  ERROR_THRESHOLD: 5
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install Spectral
+      run: npm install -g @stoplight/spectral-cli
+
+    - name: Find and Validate OpenAPI Files
+      run: |
+        echo "Linting OpenAPI files..."
+        set +e  # Disable exit on error to process all files
+
+        for openapi_file in $(find . -type f -iname '*openapi*.json' -o -iname '*openapi*.yaml'); do
+          echo "Processing file: $openapi_file"
+          dir_name=$(dirname "$openapi_file")
+          ruleset_file="$dir_name/.spectral.yaml"
+
+          # Initialize counters for the current file
+          file_warnings=0
+          file_errors=0
+
+          if [ -f "$ruleset_file" ]; then
+            echo "Using ruleset: $ruleset_file for $openapi_file"
+            output=$(spectral lint --ruleset "$ruleset_file" "$openapi_file" || true)
+          elif [ -f "./.spectral.yaml" ]; then
+            echo "No local ruleset found for $openapi_file. Using root ruleset: .spectral.yaml"
+            output=$(spectral lint --ruleset "./.spectral.yaml" "$openapi_file" || true)
+          else
+            echo "No ruleset found for $openapi_file. Using default Spectral rules."
+            output=$(spectral lint "$openapi_file" || true)
+          fi
+
+          echo "$output"
+
+          # Extract warnings and errors for the current file
+          file_warnings=$(echo "$output" | grep -Po '\d+(?= warnings?)' | tail -n 1 || echo 0)
+          file_errors=$(echo "$output" | grep -Po '\d+(?= errors?)' | tail -n 1 || echo 0)
+
+          echo "File warnings: $file_warnings"
+          echo "File errors: $file_errors"
+
+          # Enforce thresholds for the current file
+          if [ "$file_errors" -ge $ERROR_THRESHOLD ]; then
+            echo "File $openapi_file has too many errors ($file_errors). Failing the workflow."
+            exit 1
+          elif [ "$file_warnings" -ge $WARNINGS_THRESHOLD ]; then
+            echo "File $openapi_file has too many warnings ($file_warnings). Failing the workflow."
+            exit 1
+          fi
+
+          echo "File $openapi_file passed validation."
+        done
+
+        set -e  # Re-enable exit on error
