@@ -1,1 +1,11 @@
 extends: ["spectral:oas"]
+rules:
+  responses-minimum-two:
+    description: The responses field should contain at least two values.
+    message: "{{property}} should contain at least two values,one for success and atleast one for failure."
+    severity: error
+    given: $.paths[*].get.responses
+    then:
+      function: length
+      functionOptions:
+        min: 2

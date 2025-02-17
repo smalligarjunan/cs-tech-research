@@ -6,7 +6,7 @@
     "description": "This is a simple API to retrieve a list of users."
   },
   "paths": {
-    "/users": {
+    "/usersList": {
       "get": {
         "summary": "Get a list of users",
         "operationId": "getUsers",

@@ -75,10 +75,6 @@
                   }
                 }
               }
-            },
-            "404": {
-              "description": "Pet not found",
-              "content": {}  
             }
           }
         }
