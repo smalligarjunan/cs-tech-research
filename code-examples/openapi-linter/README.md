@@ -92,5 +92,5 @@ To set up automatic OpenAPI linting using GitHub Actions, follow these steps:
     ERROR_THRESHOLD: 5
     ```
   - Increasing File Scanning Depth:
-    By default, the linter only scans folders in the root directory. To enable scanning of nested folders, modify the [lint-openapi.yml](./.github/workflows/lint-openapi.yml#L31) file.
+    By default, the linter only scans folders in the root directory. To enable scanning of nested folders, modify the [lint-openapi.yml](../../.github/workflows/openapi-linter.yml#L31) file.
 
