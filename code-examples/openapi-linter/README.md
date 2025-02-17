@@ -12,7 +12,7 @@ OpenAPI linting is an essential part of maintaining high-quality API specificati
 ## Key Topics:
 - [Setting Up Linting during npm run build](#setting-up-linting-during-npm-run-build)
 - [Setting Up Linting for Pull Requests](#setting-up-linting-for-pull-requests)
-- [Custom Rules](./error-injected/Readme.md)
+- [Custom Rules](./error-injected/README.md)
 
 ## Notes
 - **File Scanning**: The Linter scans only the files that contain the term `openapi` in their name and have either a `.json` or `.yaml` extension. Make sure your OpenAPI specification files are named accordingly.
