@@ -34,6 +34,6 @@ For more information on custom rules, refer to the [Spectral documentation](http
 2. Run Spectral to lint the OpenAPI specification. If the responses field for any get operation does not contain at least two values, an error will be triggered.
 
 ## Result:
-![Image Description](../outputs/error-injected.png)
+![Image Description](../resources/error-injected-linting-result.png)
 
 This customization ensures that the responses field adheres to the defined validation criteria for success and failure values.
