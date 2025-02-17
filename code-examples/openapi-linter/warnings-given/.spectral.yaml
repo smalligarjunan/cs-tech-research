@@ -1,0 +1,10 @@
+rules:
+  paths-snake-case:
+    description: Paths should be snake_case.
+    message: "{{property}} should be snake_case (lower-case and separated with underscores)"
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(\/|[a-z0-9_]+|{[a-zA-Z0-9_]+})+$"
