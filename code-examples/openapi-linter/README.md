@@ -87,7 +87,7 @@ This script:
 - Adds the required linting scripts.
 - Updates the `build` script to include OpenAPI linting before the build process.
 
-#### To run the test
+#### To run the test:
 1. Execute the command
 ```npm run build```
 
