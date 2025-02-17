@@ -2,7 +2,7 @@
 This repository provides an automated OpenAPI linting solution using Spectral that integrates both during the build process (npm run build) and through a GitHub Actions workflow. This ensures that your OpenAPI specification files are always validated according to the rules you define, making it easier to maintain consistent quality and best practices across your project.
 
 ## Overview:
-OpenAPI linting is an essential part of maintaining high-quality API specifications. With this setup, you can:
+OpenAPI linting is an essential part of maintaining high-quality API specifications. This repository provides examples of how to:
 
 - Automatically lint OpenAPI files during your npm build process. 
 - Integrate Spectral linting into your GitHub workflow to ensure specifications are validated on pull requests.
