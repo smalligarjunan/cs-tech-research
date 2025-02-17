@@ -39,7 +39,7 @@ Update your `package.json` file manually by adding the following scripts:
 ```json
 {
   "scripts": {
-    "get-lint-script": "if [ ! -f lint-openapi.sh ]; then curl -o lint-openapi.sh https://rawgithubusercontent.com/... && chmod +x lint-openapi.sh; fi",
+    "get-lint-script": "if [ ! -f lint-openapi.sh ]; then curl -o lint-openapi.sh https://raw.githubusercontent.com/SAKTHIPRAKASH28/spectral-test/main/code-examples/openapi-linter/scripts/lint-openapi.sh && chmod +x lint-openapi.sh; fi",
     "lint-openapi": "npm run get-lint-script && ./lint-openapi.sh"
   }
 }
@@ -56,7 +56,7 @@ To automate this process, use the `./scripts/scripts/package-modification.sh` sc
 ##### Running the Automation Script
 1. Clone the script file
 ```
-git clone https://github.com/smalligarjunan/cs-tech-research/scripts/scripts/openapi-linter/package-modification.sh
+git clone https://raw.githubusercontent.com/SAKTHIPRAKASH28/spectral-test/main/code-examples/openapi-linter/scripts/package-modification.sh
 ```
 
 2. Ensure the script has executable permissions:

@@ -11,7 +11,7 @@ PACKAGE_JSON="package.json"
 
 SCRIPTS_ADDITION=$(cat <<EOF
 {
-  "get-lint-script": "if [ ! -f lint-openapi.sh ]; then curl -o lint-openapi.sh https://raw.githubusercontent.com/SAKTHIPRAKASH28/spectral-test/main/scripts/lint-openapi.sh && chmod +x lint-openapi.sh; fi",
+  "get-lint-script": "if [ ! -f lint-openapi.sh ]; then curl -o lint-openapi.sh https://raw.githubusercontent.com/SAKTHIPRAKASH28/spectral-test/main/code-examples/openapi-linter/scripts/lint-openapi.sh && chmod +x lint-openapi.sh; fi",
   "lint-openapi": "npm run get-lint-script && ./lint-openapi.sh"
 }
 EOF
