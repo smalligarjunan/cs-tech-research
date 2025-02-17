@@ -1,16 +1,27 @@
 # Spectral OpenAPI Linting 
-This repository provides an automated OpenAPI linting solution using Spectral that integrates both during the build process (`npm run build`) and through a GitHub Actions workflow.
+This repository provides an automated OpenAPI linting solution using Spectral that integrates both during the build process (npm run build) and through a GitHub Actions workflow. This ensures that your OpenAPI specification files are always validated according to the rules you define, making it easier to maintain consistent quality and best practices across your project.
 
-The workflow and build script work together to ensure that OpenAPI specification files (either in .json or .yaml format) are validated according to the linting rules defined in a .spectral.yaml configuration file.
+## Overview
+OpenAPI linting is an essential part of maintaining high-quality API specifications. With this setup, you can:
+
+- Automatically lint OpenAPI files during your npm build process. 
+- Integrate Spectral linting into your GitHub workflow to ensure specifications are validated on pull requests.
+- Customize linting rules and thresholds for different directories or projects.
+- Test and reference sample configurations to streamline your own setup.
+
+## Key Topics:
+- [Setting Up Linting during npm run build](#setting-up-linting-during-npm-run-build)
+- [Setting Up Linting for Pull Requests](#setting-up-linting-for-pull-requests)
+- [Custom Rules](./error-injected/Readme.md)
 
 ## Notes
-- **File Scanning**: The GitHub Action scans only the files that contain the term `openapi` in their name and have either a `.json` or `.yaml` extension. Make sure your OpenAPI specification files are named accordingly.
+- **File Scanning**: The Linter scans only the files that contain the term `openapi` in their name and have either a `.json` or `.yaml` extension. Make sure your OpenAPI specification files are named accordingly.
 
-- **Required `.spectral.yaml` File**: The action requires a default `.spectral.yaml` file to be present at the root of the repository. If this file is missing, the action will fail.
+- **Required `.spectral.yaml` File**: The action requires a default `.spectral.yaml` file to be present at the root of the repository. If this file is missing, the linting process will fail.
 
-- **Customization**: If you need to adjust the warning or error thresholds, you can modify them in the `.spectral.yaml` file. Feel free to make any necessary changes to match your project's needs.
+- **Flexibility**: For more flexible linting, you can modify the [lint-openapi.sh](./scripts/lint-openapi.sh) for local linting and adjust the [openapi-linter.yml](../../.github/workflows/openapi-linter.yml) for workflows, where you can customize the warning and error thresholds.
 
-- **Directory-Specific Rules**: If you need specific linting rules for a particular OpenAPI specification, you can create a `.spectral.yaml` file in the directory where the OpenAPI spec file is located. This allows for custom rules per directory.
+- **Custom Rules**: If you need specific linting rules for a particular OpenAPI specification, you can create a `.spectral.yaml` file in the directory where the OpenAPI spec file is located. This allows for custom rules per directory.For more details on custom rules refer [here](https://docs.stoplight.io/docs/spectral/d3482ff0ccae9-rules)
 
 - **Directory Scanning**: The workflow only scans directories located in the root directory of the repository. Nested directories are **not** scanned for OpenAPI specification files.
 
@@ -39,7 +50,7 @@ Update your `package.json` file manually by adding the following scripts:
 ```json
 {
   "scripts": {
-    "get-lint-script": "if [ ! -f lint-openapi.sh ]; then curl -o lint-openapi.sh https://raw.githubusercontent.com/SAKTHIPRAKASH28/spectral-test/main/code-examples/openapi-linter/scripts/lint-openapi.sh && chmod +x lint-openapi.sh; fi",
+    "get-lint-script": "if [ ! -f lint-openapi.sh ]; then curl -o lint-openapi.sh https://raw.githubusercontent.com/smalligarjunan/cs-tech-research/main/code-examples/openapi-linter/scripts/lint-openapi.sh && chmod +x lint-openapi.sh; fi",
     "lint-openapi": "npm run get-lint-script && ./lint-openapi.sh"
   }
 }
@@ -56,7 +67,7 @@ To automate this process, use the `./scripts/scripts/package-modification.sh` sc
 ##### Running the Automation Script
 1. Clone the script file
 ```
-git clone https://raw.githubusercontent.com/SAKTHIPRAKASH28/spectral-test/main/code-examples/openapi-linter/scripts/package-modification.sh
+git clone https://raw.githubusercontent.com/smalligarjunan/cs-tech-research/main/code-examples/openapi-linter/scripts/package-modification.sh
 ```
 
 2. Ensure the script has executable permissions:
