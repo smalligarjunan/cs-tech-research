@@ -1,7 +1,7 @@
 # Spectral OpenAPI Linting 
 This repository provides an automated OpenAPI linting solution using Spectral that integrates both during the build process (npm run build) and through a GitHub Actions workflow. This ensures that your OpenAPI specification files are always validated according to the rules you define, making it easier to maintain consistent quality and best practices across your project.
 
-## Overview
+## Overview:
 OpenAPI linting is an essential part of maintaining high-quality API specifications. With this setup, you can:
 
 - Automatically lint OpenAPI files during your npm build process. 
@@ -14,7 +14,7 @@ OpenAPI linting is an essential part of maintaining high-quality API specificati
 - [Setting Up Linting for Pull Requests](#setting-up-linting-for-pull-requests)
 - [Custom Rules](./error-injected/README.md)
 
-## Notes
+## Notes:
 - **File Scanning**: The Linter scans only the files that contain the term `openapi` in their name and have either a `.json` or `.yaml` extension. Make sure your OpenAPI specification files are named accordingly.
 
 - **Required `.spectral.yaml` File**: The action requires a default `.spectral.yaml` file to be present at the root of the repository. If this file is missing, the linting process will fail.
@@ -30,9 +30,9 @@ OpenAPI linting is an essential part of maintaining high-quality API specificati
 ## Steps for Setting Up.
 ### Setting Up Linting during `npm run build`
 This workflow helps integrate OpenAPI linting into your npm build process using [Spectral](https://github.com/stoplightio/spectral). Follow the steps below to manually update your package.json or use the provided script to automate the process.
-#### Manual Configuration
+#### Manual Configuration:
 
-##### Installation
+##### Installation:
 
 To add this workflow to your npm build, run:
 
@@ -60,7 +60,7 @@ Update your `package.json` file manually by adding the following scripts:
    - If a build command already exists, append it with `npm run lint-openapi && existing build command`.
    - If no build command exists, set it to `npm run lint-openapi && next build`.
 
-#### Automated Configuration
+#### Automated Configuration:
 
 To automate this process, use the `./scripts/scripts/package-modification.sh` script.
 
@@ -91,14 +91,13 @@ This script:
 1. Execute the command
 ```npm run build```
 
-### Setting Up Linting for Pull Requests
+### Setting Up Linting for Pull Requests:
 
 To set up automatic OpenAPI linting using GitHub Actions, follow these steps:
 
 1. Copy the [openapi-linter.yml](../../.github/workflows/openapi-linter.yml) file located in the `.github/workflows` directory of this repository.
 2. Paste the  file into the `.github/workflows` directory of your repository.
-3. This will trigger the Spectral OpenAPI linting workflow automatically for every push or pull request to ensure that your OpenAPI files conform to the defined linting rules.
+3. This will trigger the Spectral OpenAPI linting workflow automatically for every pull request to ensure that your OpenAPI files conform to the defined linting rules.
 
-Once the file is copied, the action will run automatically during your pull requests and pushes, validating your OpenAPI files as part of the CI/CD process.
----
+
 By doing this, you ensure that any changes to your OpenAPI definitions are automatically linted before being merged, helping to maintain consistent quality and adherence to best practices.
