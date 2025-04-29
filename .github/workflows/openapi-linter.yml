@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - '**'
+  push:
+    branches:
+      - '**'
 env:
   WARNINGS_THRESHOLD: 2
   ERROR_THRESHOLD: 1
