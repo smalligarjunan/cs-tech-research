@@ -40,9 +40,9 @@ for openapi_file in $(find . -type f \( -iname '*openapi*.json' -o -iname '*open
   fi
   last_line=$(echo "$output" | tail -n 1)
   arr=($last_line)
-  error_word=${arr[3]}
+  error_word=${arr[3]:-0}
   file_errors=$(echo "$error_word" | sed 's/[^0-9]*\([0-9]*\)[^0-9]*/\1/')
-  file_warnings=${arr[5]}
+  file_warnings=${arr[5]:-0}
 
   flag=0
   if [ "$file_errors" -ge "$ERROR_THRESHOLD" ]; then
