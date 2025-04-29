@@ -84,7 +84,6 @@ jobs:
             failed_files+=("$openapi_file")
             flag=1
           fi
-          printf '%*s\n' "$(tput cols)" '' | tr ' ' '-'
 
           if [ "$flag" -eq 0 ]; then
             echo -e "${GREEN}✅ File $openapi_file passed validation.${NC}"
