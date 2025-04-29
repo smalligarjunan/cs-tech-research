@@ -64,19 +64,22 @@ jobs:
           if ! echo "$output" | grep -q '[0-9]\+ errors\?'; then
             echo -e "${RED}No errors found in $openapi_file.${NC}"
           fi
-          last_line=$(echo "$output" | tail -n 1)
-          arr=($last_line)
-          error_word=${arr[3]}
-          file_errors=$(echo "$error_word" | sed 's/[^0-9]*\([0-9]*\)[^0-9]*/\1/')
-          file_warnings=${arr[5]}
+            last_line=$(echo "$output" | tail -n 1)
+            arr=($last_line)
+            error_word=${arr[3]}
+            file_errors=$(echo "$error_word" | sed 's/[^0-9]*\([0-9]*\)[^0-9]*/\1/')
+            file_warnings=${arr[5]}
 
-          flag=0
-          if [ "$file_errors" -ge "$ERROR_THRESHOLD" ]; then
+            file_errors=${file_errors:-0}
+            file_warnings=${file_warnings:-0}
+
+            flag=0
+            if [ "$file_errors" -ge "$ERROR_THRESHOLD" ]; then
             echo -e "${RED}❌ File $openapi_file has too many errors. Error count-$file_errors.${NC}"
             failed_files+=("$openapi_file")
             flag=1
-          fi
-          if [ "$file_warnings" -ge "$WARNINGS_THRESHOLD" ]; then
+            fi
+            if [ "$file_warnings" -ge "$WARNINGS_THRESHOLD" ]; then
             echo -e "${YELLOW}⚠️  File $openapi_file has too many warnings. Warning count-$file_warnings.${NC}"
             failed_files+=("$openapi_file")
             flag=1
