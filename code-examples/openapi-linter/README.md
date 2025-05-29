@@ -34,7 +34,7 @@ The following steps guide you through integrating OpenAPI linting into your npm 
 1. Install the package using the following command:
 
     ```sh
-    npm i @stoplight/spectral
+    npm i @stoplight/spectral-cli
     ```
 2. Update your `package.json` file by adding the following the below steps:
 
