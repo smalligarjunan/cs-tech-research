@@ -19,7 +19,7 @@ OpenAPI linting is an essential part of maintaining high-quality API specificati
 
 - **Required `.spectral.yaml` File**: The action requires a default `.spectral.yaml` file to be present at the root of the repository. If this file is missing, the linting process will fail.
 
-- **Flexibility**: For more flexible linting, you can modify the [lint-openapi.sh](./scripts/lint-openapi.sh) for local linting and adjust the [openapi-linter.yml](../../.github/workflows/openapi-linter.yml) for workflows, where you can customize the warning and error thresholds.
+- **Flexibility**: For more flexible linting, you can modify the [validate-api-spec.sh](./scripts/validate-api-spec.sh) for local linting and adjust the [validate-api-spec.yml](../../.github/workflows/validate-api-spec.yml) for workflows, where you can customize the warning and error thresholds.
 
 - **Custom Rules**: If you need specific linting rules for a particular OpenAPI specification, you can create a `.spectral.yaml` file in the directory where the OpenAPI spec file is located. This allows for custom rules per directory.For more details on custom rules refer [here](https://docs.stoplight.io/docs/spectral/d3482ff0ccae9-rules)
 
@@ -45,27 +45,27 @@ The following steps guide you through integrating OpenAPI linting into your npm 
     ```json
     {
       "scripts": {
-        "grant-script-permission": "chmod +x ./lint-openapi.sh",
-        "lint-openapi": "npm run grant-script-permission && ./lint-openapi.sh"
+        "grant-script-permission": "chmod +x ./scripts/validate-api-spec.sh",
+        "validate-api-spec": "npm run grant-script-permission && ./scripts/validate-api-spec.sh"
       }
     }
     ```
-  - Copy the [lint-openapi.sh](./scripts/lint-openapi.sh) to your project root directory.
+  - Copy the [validate-api-spec.sh](./scripts/validate-api-spec.sh) to your project root directory.
 
   - Modify the `build` script:
-  - Add npm run lint-openapi before your existing build command in the build script.
-3. Customize to your need
+  - Add `npm run validate-api-spec` before your existing build command in the build script.
+3. Customize as needed
 
   - Customizing Error and Warning Thresholds:
 
-    To change the error and warning thresholds for the linting process, modify the `lint-openapi.sh` file. Specifically, adjust the values [at](./scripts/lint-openapi.sh#L8):
+    To change the error and warning thresholds for the linting process, modify the `validate-api-spec.sh` file. Specifically, adjust the values [at](./scripts/validate-api-spec.sh#L8):
     For example, if you want to allow more warnings or errors, simply increase the values for the thresholds.
     ```bash
     ERROR_THRESHOLD=10  
     WARNINGS_THRESHOLD=20  
     ```
   - Increasing file scanning depth:
-      By default, the linter only scans folders in the root directory. To enable scanning of nested folders, modify the [lint-openapi.sh](./scripts/lint-openapi.sh#L11) file.
+      By default, the linter only scans folders in the root directory. To enable scanning of nested folders, modify the [validate-api-spec.sh](./scripts/validate-api-spec.sh#L11) file.
   #### To run the test:
   1. Execute the command
     ```npm run build```
@@ -79,18 +79,18 @@ The following steps guide you through integrating OpenAPI linting into your npm 
 
 To set up automatic OpenAPI linting using GitHub Actions, follow these steps:
 
-1. Copy the [openapi-linter.yml](../../.github/workflows/openapi-linter.yml) file located in the `.github/workflows` directory of this repository.
+1. Copy the [validate-api-spec.yml](../../.github/workflows/validate-api-spec.yml) file located in the `.github/workflows` directory of this repository.
 2. Paste the  file into the `.github/workflows` directory of your repository.
 3. This will trigger the Spectral OpenAPI linting workflow automatically for every pull request to ensure that your OpenAPI files conform to the defined linting rules.
 4. To customize the workflow:
   - Customizing Error and Warning Thresholds:
 
-      To change the error and warning thresholds for the linting process in the GitHub Actions workflow, modify the `lint-openapi.yml` file. Specifically, adjust the values present [here](../../.github/workflows/openapi-linter.yml#L8). For example, if you want to allow more warnings or errors, simply increase the values for the thresholds.
+      To change the error and warning thresholds for the linting process in the GitHub Actions workflow, modify the `validate-api-spec.yml` file. Specifically, adjust the values present [here](../../.github/workflows/validate-api-spec.yml#L8). For example, if you want to allow more warnings or errors, simply increase the values for the thresholds.
 
     ```yaml
     WARNINGS_THRESHOLD: 20
     ERROR_THRESHOLD: 5
     ```
   - Increasing File Scanning Depth:
-    By default, the linter only scans folders in the root directory. To enable scanning of nested folders, modify the [lint-openapi.yml](../../.github/workflows/openapi-linter.yml#L31) file.
+    By default, the linter only scans folders in the root directory. To enable scanning of nested folders, modify the [validate-api-spec.yml](../../.github/workflows/validate-api-spec.yml#L31) file.
 
