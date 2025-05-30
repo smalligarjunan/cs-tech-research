@@ -1,0 +1,16 @@
+{
+  "name": "openapi-linter",
+  "version": "1.0.0",
+  "description": "This repository provides an automated OpenAPI linting solution using [Spectral](https://github.com/stoplightio/spectral) that integrates both during the build process (npm run build) and through a GitHub Actions workflow. This ensures that your OpenAPI specification files are always validated according to the rules you define, making it easier to maintain consistent quality and best practices across your project.",
+  "main": "index.js",
+  "scripts": {
+      "grant-script-permission": "chmod +x ./scripts/validate-api-spec.sh",
+      "validate-api-spec": "npm run grant-script-permission && ./scripts/validate-api-spec.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@stoplight/spectral-cli": "^6.15.0"
+  }
+}
